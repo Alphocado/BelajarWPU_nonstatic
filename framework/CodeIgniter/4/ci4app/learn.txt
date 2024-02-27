@@ -19,3 +19,7 @@ file template buat configurasi enviroment
 rename jadi .env (saran di duplikat saja)
 
 kalau pakai .env app dalam config folder tidak dipakai
+
+
+Routes
+yang akan menentukan jalur dari aplikasi
