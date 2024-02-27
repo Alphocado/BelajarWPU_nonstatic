@@ -1,0 +1,59 @@
+isi mvc:
+- public (file file yang bisa diakses oleh user):
+  - img
+  - css
+  - js
+  - index.php (yang akan menjadi file utama)
+- app (menyimpan folder/file2 utama mvc):
+  - core (inti mvc seperti routing):
+    - App.php (class) <--------\
+    - Controller.php (class) <--\---- (2 class utama pembentuk MVC)
+  - controllers
+  - views (antar muka yang akan disajikan controller):
+    - home (semua tampilan akan disimpan di sini)
+  - model
+  - init.php (yang akan memanggil semua file php yang dibutuhkan / bootstrapping)
+
+perbedaan controllers folder dan controller file:
+Controller file: class utama
+controllers folder: semua isi foldernya akan extends (dipakai di file controller)
+
+ada folder yang tdk bisa dimasuki user biasa, 
+jadi restrict dengan file .htaccess
+
+rencananya, lewat url bisa memasukkan method 
+dan bisa diproses oleh folder public berkat .htaccess di folder public
+
+file2 di controllers menjadi template dan ketika dipanggil App.php otomatis mengubah tampilan
+App.php akan memanipulasi url untuk dijadikan controller file
+maksud controller file, jika kita memasukkan apapun setelah mvc/public/~~~~
+maka url pertama (sebelum garis lagi /) akan dianggap sebagai controller
+dan akan dicari filenya di folder app/controllers
+
+lalu folder view, berisi file yang akan ditampilkan di halaman
+cara aksesnya dengan controller via url
+misal jika kosong akan langsung akses ke page home dengan method index
+method indexnya ada di dalam file home nya
+lalu di method indexnya ada function view yang berasal dari Controller.php
+syarat menggunakannya adalah dengan extends atau menjadikan Home.php sebagai child dari controller.php
+
+bagaimana caranya Home.php dan About.php punya akses dari controller.php?
+Dari file init.php
+
+karena dianggap sebuah perulangan yang tidak berguna,
+maka 1 file php header dan footernya dihapus dan memiliki template sendiri di
+folder views dan akan di panggil file controllers/file.php masing2
+
+
+model akan berperan sebagai pengatur data
+contohnya data mahasiswa_model.php berisi data mahasiswa
+digunakan oleh controllers/mahasiswa untuk menampilkan data mahasiswa
+
+ada perubahan
+folder di core, tempat disimpannya variable baseurl dipindahkan di folder app/config/config.php
+di config.php akan disimpan variable yang tidak bisa diubah
+untuk connect server ada dibuat file baru di folder core
+
+penting untuk dilihat isi dari database.php
+
+Flasher ini untuk memberikan pesan popup

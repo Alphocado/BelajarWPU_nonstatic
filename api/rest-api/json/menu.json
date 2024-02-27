@@ -1,0 +1,74 @@
+{
+  "restoran": "Contoh Restoran",
+  "menu": [
+    {
+      "kategori": "Pizza",
+      "menu_items": [
+        {
+          "nama": "Pizza Margherita",
+          "deskripsi": "Saus tomat, keju mozzarella, basil segar",
+          "harga": 50000,
+          "gambar": "pizza_margherita.jpg"
+        },
+        {
+          "nama": "Pizza Pepperoni",
+          "deskripsi": "Pepperoni, saus tomat, keju mozzarella",
+          "harga": 55000,
+          "gambar": "pizza_pepperoni.jpg"
+        },
+        {
+          "nama": "Pizza Hawaiian",
+          "deskripsi": "Daging ham, potongan nanas, saus tomat, keju mozzarella",
+          "harga": 60000,
+          "gambar": "pizza_hawaiian.jpg"
+        }
+      ]
+    },
+    {
+      "kategori": "Ayam Goreng",
+      "menu_items": [
+        {
+          "nama": "Ayam Original",
+          "deskripsi": "Ayam goreng dengan bumbu original",
+          "harga": 25000,
+          "gambar": "ayam_original.jpg"
+        },
+        {
+          "nama": "Ayam Pedas",
+          "deskripsi": "Ayam goreng pedas dengan bumbu khas",
+          "harga": 28000,
+          "gambar": "ayam_pedas.jpg"
+        },
+        {
+          "nama": "Ayam Kentucky",
+          "deskripsi": "Ayam goreng dengan rempah ala Kentucky",
+          "harga": 30000,
+          "gambar": "ayam_kentucky.jpg"
+        }
+      ]
+    },
+    {
+      "kategori": "Minuman",
+      "menu_items": [
+        {
+          "nama": "Coca-Cola",
+          "deskripsi": "Minuman ringan berkarbonasi",
+          "harga": 8000,
+          "gambar": "coke.jpg"
+        },
+        {
+          "nama": "Es Teh",
+          "deskripsi": "Es teh manis dingin",
+          "harga": 5000,
+          "gambar": "es_teh.jpg"
+        },
+        {
+          "nama": "Jus Jeruk",
+          "deskripsi": "Jus jeruk segar",
+          "harga": 10000,
+          "gambar": "jus_jeruk.jpg"
+        }
+      ]
+    }
+  ]
+}
