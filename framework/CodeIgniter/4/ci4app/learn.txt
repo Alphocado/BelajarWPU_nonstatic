@@ -1,0 +1,21 @@
+folder app adalah folder inti dari codeigniter
+aplikasi akan tersimpan dalam folder app
+
+public = tempat menyimpan assets
+tests = untuk melakukan testing
+vendor = tempat menyimpan dependensi dari aplikasi (otomasi terisi)
+writable = ci mengisi sesuatu disini
+
+yang hanya dimodifikasi hanya folder app saja kecuali file env
+didalam app folder yang dimodif config, controllers, models, views
+
+di folder config
+app = configurasi utama aplikasi, yang biasa diubah biasa base url
+database = untuk mengatur database
+Routes = mengatur jalur pengaksesan aplikasi
+
+env 
+file template buat configurasi enviroment
+rename jadi .env (saran di duplikat saja)
+
+kalau pakai .env app dalam config folder tidak dipakai

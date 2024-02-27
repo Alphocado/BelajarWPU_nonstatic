@@ -1,0 +1,5 @@
+instal
+composer create-project codeigniter4/appstarter ci4app --no-dev
+
+run
+php spark serve
