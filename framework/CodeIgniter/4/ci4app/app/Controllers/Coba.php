@@ -8,8 +8,8 @@ class Coba extends BaseController
   {
     echo "Page Coba";
   }
-  public function about($nama = '', $umur = 0)
+  public function about($nama = '')
   {
-    echo "My name is $nama, im $umur years old";
+    echo "My name is $nama";
   }
 }
