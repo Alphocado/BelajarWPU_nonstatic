@@ -23,3 +23,8 @@ kalau pakai .env app dalam config folder tidak dipakai
 
 Routes
 yang akan menentukan jalur dari aplikasi
+
+
+migration
+cara membuat table pada database tdk lewat phpmyadmin dsb
+tapi buat tablenya lewat script
