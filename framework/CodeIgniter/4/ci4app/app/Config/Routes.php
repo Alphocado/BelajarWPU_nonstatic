@@ -15,3 +15,7 @@ $routes->get('/', 'Pages::index');
 
 // lompati tanpa harus ketik di url admin/users
 // $routes->get('/users', 'Admin\Users::index');
+
+// apapun setelah komik
+// akan dibawa ke controller Komik dengan method detail dan akan jadi parameter
+$routes->get('/komik/(:segment)', 'Komik::detail/$1');
