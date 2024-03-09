@@ -31,13 +31,16 @@ class Komik extends BaseController
     // pake model
     // $komikModel = new \App\Models\KomikModel();
 
-    return view('komik/index', $data);
+    return view('/komik/index', $data);
   }
 
   public function create()
   {
+
+    session();
     $data = [
       'title' => 'Form tambah data komik',
+      'validation' => \Config\Services::validation()
     ];
     return view('komik/create', $data);
   }
@@ -45,6 +48,21 @@ class Komik extends BaseController
   public function save()
   {
     // dd($this->request->getVar());
+
+    // validasi input
+    if (!$this->validate([
+      'judul' => [
+        'rules' => 'required|is_unique[komik.judul]',
+        'errors' => [
+          'required' => '{field} komik harus diisi.',
+          'is_unique' => '{field} komik sudah terdaftar'
+        ]
+      ]
+    ])) {
+      $validation = \Config\Services::validation();
+      session()->setFlashdata('validation', $validation);
+      return redirect()->to('/komik/create');
+    }
 
     $slug = url_title($this->request->getVar('judul'), '-', true);
     $this->komikModel->save([
