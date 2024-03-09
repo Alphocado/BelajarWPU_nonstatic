@@ -18,4 +18,11 @@ $routes->get('/', 'Pages::index');
 
 // apapun setelah komik
 // akan dibawa ke controller Komik dengan method detail dan akan jadi parameter
+
+
+
+$routes->get('/komik/create', 'Komik::create');
+
+
+
 $routes->get('/komik/(:segment)', 'Komik::detail/$1');
