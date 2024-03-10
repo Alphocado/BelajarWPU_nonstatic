@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\KomikModel;
+use \Config\Services;
 
 class Komik extends BaseController
 {
@@ -36,12 +37,18 @@ class Komik extends BaseController
 
   public function create()
   {
-
-    session();
-    $data = [
-      'title' => 'Form tambah data komik',
-      'validation' => \Config\Services::validation()
-    ];
+    $title = 'Form tambah data komik';
+    if (session()->has('validation')) {
+      $data = [
+        'title' => $title,
+        'validation' => session('validation')
+      ];
+    } else {
+      $data = [
+        'title' => $title,
+        'validation' => Services::validation()
+      ];
+    }
     return view('komik/create', $data);
   }
 
@@ -54,14 +61,21 @@ class Komik extends BaseController
       'judul' => [
         'rules' => 'required|is_unique[komik.judul]',
         'errors' => [
-          'required' => '{field} komik harus diisi.',
+          'required' => '{field} komik harus diisi',
           'is_unique' => '{field} komik sudah terdaftar'
-        ]
-      ]
+        ],
+      ],
+      'sampul' => 'uploaded[sampul]'
     ])) {
-      $validation = \Config\Services::validation();
-      session()->setFlashdata('validation', $validation);
-      return redirect()->to('/komik/create');
+      $validation = Services::validation();
+
+      /** 
+       * pada bagian atas, saat validasi 'sampul' itu berhasil
+       * tetapi saat redirect langsung error, dilihat 
+       * apa masalahnya lagian beda versi 
+       * mau bgmn,,,
+       */
+      return redirect()->to('/komik/create')->withInput()->with('validation', $validation);
     }
 
     $slug = url_title($this->request->getVar('judul'), '-', true);
@@ -78,6 +92,29 @@ class Komik extends BaseController
     return redirect()->to('/komik');
   }
 
+  public function delete($id)
+  {
+    $this->komikModel->delete($id);
+    session()->setFlashdata('pesan', 'Data berhasil dihapuskan');
+    return redirect()->to('/komik');
+  }
+
+  public function edit($slug)
+  {
+    $title = 'Form ubah data Komik';
+    if (session()->has('validation')) {
+      $validation = session('validation');
+    } else {
+      $validation = Services::validation();
+    }
+    $data = [
+      'title' => $title,
+      'validation' => $validation,
+      'komik' => $this->komikModel->getKomik($slug)
+    ];
+    return view('komik/edit', $data);
+  }
+
   public function detail($slug)
   {
     $data = [
@@ -89,5 +126,43 @@ class Komik extends BaseController
       throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul komik ' . $slug . ' tidak ditemukan');
     }
     return view('komik/detail', $data);
+  }
+
+  public function update($id)
+  {
+    // cek judul
+    $komikLama = $this->komikModel->getKomik($this->request->getVar('slug'));
+    if ($komikLama['judul'] == $this->request->getVar('judul')) {
+      $rule_judul = 'required';
+    } else {
+      $rule_judul = 'required|is_unique[komik.judul]';
+    }
+
+    if (!$this->validate([
+      'judul' => [
+        'rules' => $rule_judul,
+        'errors' => [
+          'required' => '{field} komik harus diisi',
+          'is_unique' => '{field} komik sudah terdaftar'
+        ]
+      ]
+    ])) {
+      $validation = Services::validation();
+      return redirect()->to('/komik/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
+    }
+
+    $slug = url_title($this->request->getVar('judul'), '-', true);
+    $this->komikModel->save([
+      'id' => $id,
+      'judul' => $this->request->getVar('judul'),
+      'slug' => $slug,
+      'penulis' => $this->request->getVar('penulis'),
+      'penerbit' => $this->request->getVar('penerbit'),
+      'sampul' => $this->request->getVar('sampul')
+    ]);
+
+    session()->setFlashdata('pesan', 'Data berhasil diubah');
+
+    return redirect()->to('/komik');
   }
 }
