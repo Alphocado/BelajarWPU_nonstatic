@@ -68,14 +68,8 @@ class Komik extends BaseController
       'sampul' => 'uploaded[sampul]'
     ])) {
       $validation = Services::validation();
-
-      /** 
-       * pada bagian atas, saat validasi 'sampul' itu berhasil
-       * tetapi saat redirect langsung error, dilihat 
-       * apa masalahnya lagian beda versi 
-       * mau bgmn,,,
-       */
-      return redirect()->to('/komik/create')->withInput()->with('validation', $validation);
+      $errors = $validation->getErrors();
+      return redirect()->to('/komik/create')->withInput()->with('errors', $errors);
     }
 
     $slug = url_title($this->request->getVar('judul'), '-', true);

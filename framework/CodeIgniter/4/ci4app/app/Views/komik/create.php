@@ -1,5 +1,8 @@
 <?= $this->extend('layout/template') ?>
 <?= $this->section('content'); ?>
+<?php
+$errors = session()->getFlashdata('errors');
+?>
 <div class="container">
   <div class="row">
     <div class="col-8">
@@ -10,9 +13,9 @@
         <div class="form-group row">
           <label for="judul" class="col-sm-2 col-form-label">Judul</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : '' ?>" id="judul" name="judul" autofocus value="<?= old('judul') ?>">
+            <input type="text" class="form-control <?= (!empty($errors['judul'])) ? 'is-invalid' : '' ?>" id="judul" name="judul" autofocus value="<?= old('judul') ?>">
             <div class="invalid-feedback">
-              <?= $validation->getError('judul') ?>
+              <?= (!empty($errors['judul'])) ? $errors['judul'] : '' ?>
             </div>
           </div>
         </div>
@@ -35,7 +38,10 @@
           <label for="sampul" class="col-sm-2 col-form-label">Sampul</label>
           <div class="col-sm-10">
             <div class="custom-file">
-              <input type="file" class="custom-file-input <?= ($validation->hasError('judul')) ? 'is-invalid' : '' ?>" id="sampul" name="sampul">
+              <input type="file" class="custom-file-input <?= (!empty($errors['sampul'])) ? 'is-invalid' : '' ?>" id="sampul" name="sampul">
+              <div class="invalid-feedback">
+                <?= (!empty($errors['sampul'])) ? $errors['sampul'] : '' ?>
+              </div>
               <label class="custom-file-label" for="sampul">Pilih gambar...</label>
             </div>
           </div>
