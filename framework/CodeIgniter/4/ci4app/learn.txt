@@ -28,3 +28,36 @@ yang akan menentukan jalur dari aplikasi
 migration
 cara membuat table pada database tdk lewat phpmyadmin dsb
 tapi buat tablenya lewat script
+
+membuat migrasi
+> php spark migrate:create 'nama'
+
+mengeksekusi semua file migrate
+> php spark migrate
+
+
+seeder, mengisi table secara otomatis 
+isi default file seeder
+> <?php
+
+  namespace App\Database\Seeds;
+
+  class OrangSeeder extends \CodeIgniter\Database\Seeder
+  {
+    public function run()
+    {
+      $data = [
+        'username' => 'udin',
+        'email' => 'udin@gmail.com'
+      ];
+      $this->db->query("INSERT INTO users (username, email) VALUES(:username:, :email:)", $data);
+      $this->db->table('users')->insert($data);
+    }
+  }
+
+
+cara run seeder
+> php spark db:seed TestSeeder
+
+
+kalau seeder bisa membantu memasukkan data, faker memberi data palsu
