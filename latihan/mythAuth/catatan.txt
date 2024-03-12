@@ -1,0 +1,10 @@
+instal
+composer create-project codeigniter4/appstarter ci4app --no-dev
+
+run
+php spark serve
+
+
+JIKA MAU AKSES URL SECARA BEBAS 
+ke app/config/Routing.php
+set $autoRoute jadi true
